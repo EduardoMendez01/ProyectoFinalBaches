@@ -1,0 +1,94 @@
+{% extends "./base.html" %}
+{% block title %} reportes {% endblock%}
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'verReportesAdminCSS/main.css' %}">
+
+<div class="row">
+    <div class="col-sm-12 col-md-12  col-lg-12 col-xl-12">
+
+        <form method="get">
+            <label for="filtro">Filtrar por Tipo:</label>
+            <select name="filtro" id="filtro">
+                <option value="">Todos</option>
+                <!-- Agrega opciones para cada tipo de reporte -->
+                <option value="baches">baches</option>
+                <option value="Problemas de alumbrado">Problemas de alumbrado</option>
+                <option value="Fuga en alcantarillas">Fuga en alcantarillas</option>
+                <option value="Reporte de basura sobre vía pública">Reporte de basura sobre vía pública</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+        <div class="table-responsive">
+            <H1>Reportes</H1>
+            <table class="table table-striped py-2">
+                <thead>
+                    <tr>
+                        <th>codigo</th>
+                        <th>Tipo</th>
+                        <th>Descripcion</th>
+                        <th>Ubicacion</th>
+                        <th>Estatus</th>
+                        <th>Imagen</th>
+                        <th>Comentarios</th>
+                        <th colspan="2">Opciones </th>
+
+                    </tr>
+                </thead>
+                <TBody>
+                    {% for r in reportesAdmin %}
+                    <tr>
+                        <td>{{r.codigo}}</td>
+                        <td>{{r.tipo}}</td>
+                        <td>{{r.descripcion}}</td>
+                        <td>{{r.ubicacion}}</td>
+                        <td>{{r.estatus}}</td>
+                        <td>
+                            {% if r.imagen %}
+                                <img src="{{ r.imagen.url }}" alt="Imagen" class="imagen-reducida">
+                            {% else %}
+                                Sin imagen
+                            {% endif %}
+                        </td>
+                        <td>{{r.comentario}}</td>
+                        <td><a href="editarReporte/{{r.codigo}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="VisualizarReportesAdmin/{{r.codigo}}" class="btn btn-info">ver</a></td>
+                    </tr>
+                    {% endfor %}
+                </TBody>
+
+
+                <div id="imagenes"></div>
+
+                <script>
+                    document.getElementById('imagen').addEventListener('change', function () {
+                        var input = this;
+                        var preview = document.getElementById('imagenes');
+
+                        while (preview.firstChild) {
+                            preview.removeChild(preview.firstChild);
+                        }
+
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                var img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.alt = 'Evidencia Fotográfica';
+                                img.className = 'imagen-reducida';
+                                preview.appendChild(img);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    });
+                </script>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

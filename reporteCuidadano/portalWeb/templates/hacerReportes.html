@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reportes</title>
+    <link rel="stylesheet" href="{% static 'hacerReportesCSS/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="form-container">
+        <img src="https://www.elpais.com.co/resizer/zLfi3op0s_a-8VVIw4t_h4bBjJ4=/1280x720/smart/filters:format(jpg):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/semana/EW4XQNJY7JEWTI4F57CVYBZU5E.png" class="card-img-top" alt="...">
+        <form method="post" action="/hacerReportes/" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="reporte" class="form-label">Tipo de Reporte</label>
+                <select class="form-select" name="reporte" id="reporte">
+                    <option value="baches">Baches</option>
+                    <option value="problemas de alumbrado">Problemas de alumbrado</option>
+                    <option value="fuga en alcantarillas">Fuga en alcantarillas</option>
+                    <option value="reporte de basura sobre vía pública">Reporte de basura sobre vía pública</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripción del Problema</label>
+                <textarea class="form-control" id="Descripcion" rows="3" name="Descripcion"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="ubicacion" class="form-label">Ubicación</label>
+                <input class="form-control form-control-lg" type="text" name="ubicacion" id="ubicacion"
+                    aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Seleccionar Imagen</label>
+                <input class="form-control" type="file" id="imagen" name="imagen">
+            </div>
+
+           
+
+            <div id="imagenes"></div>
+
+            <button type="submit" class="btn btn-primary">Reportar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('imagen').addEventListener('change', function () {
+            var input = this;
+            var preview = document.getElementById('imagenes');
+
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Evidencia Fotográfica';
+                    img.className = 'imagen-reducida';
+                    preview.appendChild(img);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

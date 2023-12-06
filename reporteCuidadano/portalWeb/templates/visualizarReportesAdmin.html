@@ -1,0 +1,50 @@
+{% extends "./base.html" %}
+{% block title %}Reportes{% endblock %}
+{% block body %}
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'visualizarReporteAdminCSS/main.css' %}">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Detalles del Reporte</h1>
+
+                <div class="detalle-item">
+                    <strong>Código:</strong>
+                    <span>{{ reporte.codigo }}</span>
+                </div>
+
+                <div class="detalle-item">
+                    <strong>Tipo:</strong>
+                    <span>{{ reporte.tipo }}</span>
+                </div>
+
+                <!-- Agrega más detalles del reporte según tus necesidades -->
+
+                <div class="detalle-item">
+                    <strong>Imagen:</strong>
+                    {% if reporte.imagen %}
+                        <img src="{{ reporte.imagen.url }}" alt="Imagen del Reporte">
+                    {% else %}
+                        Sin imagen
+                    {% endif %}
+                </div>
+
+                <div class="detalle-item">
+                    <strong>Comentarios:</strong>
+                    <span>{{ reporte.comentario }}</span>
+                </div>
+
+                <div class="detalle-item">
+                    <a href="{% url 'editarReporte' codigo=reporte.codigo %}" class="btn btn-info">Editar</a>
+                </div>
+
+                <div class="detalle-item">
+                    <a href="{% url 'verReportesAdmin' %}" class="btn btn-info">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

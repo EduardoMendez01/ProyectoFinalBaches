@@ -1,0 +1,15 @@
+
+/*centrar los formularios */
+.contenedor-formularios {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.logo-img {
+max-width: 250px;
+height: auto; 
+margin-bottom: 10px; 
+}

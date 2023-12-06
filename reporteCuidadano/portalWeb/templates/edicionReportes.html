@@ -1,0 +1,23 @@
+<!-- En tu archivo editar_reporte.html -->
+{% extends "./base.html" %}
+{% block title %}Editar Reporte{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 offset-md-12">
+        <form action="{% url 'editarReporte' codigo=reporte.codigo %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <input class="form-control form-control-lg" type="text" name="status" value="{{ reporte.estatus }}" id="status">
+            </div>
+            <div class="mb-3">
+                <label for="comentarios" class="form-label">Comentarios</label>
+                <input class="form-control form-control-lg" type="text" name="comentarios" value="{{ reporte.comentario }}" id="comentarios">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

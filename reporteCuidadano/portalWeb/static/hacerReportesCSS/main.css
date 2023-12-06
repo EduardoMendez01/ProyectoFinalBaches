@@ -1,0 +1,35 @@
+
+
+.imagen-reducida {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+#imagenes {
+    margin-top: 20px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-img-top {
+    width: 50%; /* Ajusta el tamaño según tus necesidades */
+    margin-top: -20px; /* Ajusta este valor para mover la imagen hacia arriba */
+}

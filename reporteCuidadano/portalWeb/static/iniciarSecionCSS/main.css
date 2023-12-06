@@ -1,0 +1,13 @@
+.contenedor-formularios-sesion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.logo-img-sesion {
+    max-width: 300px;
+    height: auto; 
+    margin-bottom: 10px; 
+    }
